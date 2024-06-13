@@ -1,0 +1,35 @@
+<form [formGroup]="userForm" (ngSubmit)="saveUser()">
+    <div>
+      <label for="userName">User Name:</label>
+      <input id="userName" type="text" formControlName="userName" />
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email" />
+    </div>
+    <div formArrayName="addresses">
+      <div *ngFor="let address of addresses.controls; let i = index" [formGroupName]="i">
+        <div>
+          <label for="street">Street:</label>
+          <input id="street" type="text" formControlName="street" />
+        </div>
+        <div>
+          <label for="city">City:</label>
+          <input id="city" type="text" formControlName="city" />
+        </div>
+        <div>
+          <label for="state">State:</label>
+          <input id="state" type="text" formControlName="state" />
+        </div>
+        <div>
+          <label for="zipCode">Zip Code:</label>
+          <input id="zipCode" type="text" formControlName="zipCode" />
+        </div>
+        <button type="button" (click)="removeAddress(i)">Remove Address</button>
+      </div>
+    </div>
+    <button type="button" (click)="addAddress()">Add Address</button>
+    <button type="submit">Save User</button>
+    <button type="button" (click)="deleteUser()" *ngIf="user && user._id">Delete User</button>
+  </form>
+  
